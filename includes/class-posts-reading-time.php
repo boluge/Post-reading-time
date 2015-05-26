@@ -132,7 +132,7 @@ class Posts_Reading_Time {
 		$this->calcul = new Posts_Reading_Time_Calc();
 
 		//var_dump(get_option('prtime_options', '200'));
-		var_dump($this->calcul);
+		//var_dump($this->calcul);
 
 	}
 

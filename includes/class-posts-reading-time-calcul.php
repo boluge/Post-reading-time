@@ -52,11 +52,34 @@ class Posts_Reading_Time_Calc {
 			'prtime_display' => '1'
 		);
 		$this->options = get_option('prtime_options', $default);
-		//$this->wpm = wp_load_alloptions();
-		// $options['pages'] = get_option('prtime_page');
-		// $options['position'] = get_option('prtime_position');
-		// $options['display'] = get_option('prtime_display');
-		// $this->options = $options;
+
+		function before_the_content( $content ) {
+			$before_content = '<p class="read">YOUR CONTENT GOES HERE</p>';
+			$before_content .= $content;
+			return $before_content;
+		}
+		add_filter( 'the_content', 'before_the_content' );
+
+		function after_the_content( $content ) {
+			$after_content = $content;
+			$after_content .= '<div class="read">YOUR CONTENT GOES HERE</div>';
+			return $after_content;
+		}
+		add_filter( 'the_content', 'after_the_content' );
+
+		function before_the_excerpt( $excerpt ) {
+			$before_excerpt = '<p class="read">YOUR CONTENT GOES HERE</p>';
+			$before_excerpt .= $excerpt;
+			return $before_excerpt;
+		}
+		add_filter( 'the_excerpt', 'before_the_excerpt' );
+
+		function after_the_excerpt( $excerpt ) {
+			$after_excerpt = $excerpt;
+			$after_excerpt .= '<p class="read">YOUR CONTENT GOES HERE</p>';
+			return $after_excerpt;
+		}
+		add_filter( 'the_excerpt', 'after_the_excerpt' );
 	}
 
 }
