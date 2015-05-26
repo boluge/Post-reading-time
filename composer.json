@@ -1,0 +1,12 @@
+{
+    "name": "stephanedeluce/posts-reading-time",
+    "authors": [
+        {
+            "name": "Stephane Deluce",
+            "email": "boluge@gmail.com"
+        }
+    ],
+    "require": {
+    	"webdevstudios/cmb2": "2.0.6"
+    }
+}
