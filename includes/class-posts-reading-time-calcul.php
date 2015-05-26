@@ -30,6 +30,8 @@
 class Posts_Reading_Time_Calc {
 
 	private $options;
+	private $article;
+	private $secondes;
 
 	/**
 	 * Define the core functionality of the plugin.
@@ -53,7 +55,7 @@ class Posts_Reading_Time_Calc {
 		);
 		$this->options = get_option('prtime_options', $default);
 
-		function before_the_content( $content ) {
+		/*function before_the_content( $content ) {
 			$before_content = '<p class="read">YOUR CONTENT GOES HERE</p>';
 			$before_content .= $content;
 			return $before_content;
@@ -79,7 +81,37 @@ class Posts_Reading_Time_Calc {
 			$after_excerpt .= '<p class="read">YOUR CONTENT GOES HERE</p>';
 			return $after_excerpt;
 		}
-		add_filter( 'the_excerpt', 'after_the_excerpt' );
+		add_filter( 'the_excerpt', 'after_the_excerpt' );*/
+	}
+
+	public function post_read_time() {
+	
+		$post_id = get_the_ID();
+
+		var_dump($post_id);
+		
+		$content = apply_filters('the_content', get_post_field('post_content', $post_id));
+		$num_words = str_word_count(strip_tags($content));
+		$minutes = floor($num_words / $words_per_second_option);
+		$seconds = floor($num_words % $words_per_second_option / ($words_per_second_option / 60));
+		$estimated_time = $prefix;
+		if($time == "1") {
+			if($seconds >= 30) {
+				$minutes = $minutes + 1;
+			}
+			$estimated_time = $estimated_time.' '.$minutes . ' minute'. ($minutes == 1 ? '' : 's');
+		}
+		else {
+			$estimated_time = $estimated_time.' '.$minutes . ' minute'. ($minutes == 1 ? '' : 's') . ', ' . $seconds . ' second' . ($seconds == 1 ? '' : 's');		
+		}
+		if($minutes < 1) {
+			$estimated_time = $estimated_time." Less than a minute";
+		}
+
+		$estimated_time = $estimated_time.$suffix;
+		
+		echo $estimated_time;
+
 	}
 
 }
