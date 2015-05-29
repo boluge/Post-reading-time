@@ -30,6 +30,10 @@
 class Posts_Reading_Time_Calc {
 
 	private $options;
+	private $wpm;
+	private $position;
+	private $page;
+	private $display;
 
 	/**
 	 * Define the core functionality of the plugin.
@@ -46,38 +50,78 @@ class Posts_Reading_Time_Calc {
 			'prtime_wpm' => '200',
 			'prtime_position' => '1',
 			'prtime_page' => array(
-				'category',
-				'archive'
+				'is_category()',
+				'is_archive()'
 			),
 			'prtime_display' => '1'
 		);
+
 		$this->options = get_option('prtime_options', $default);
 
-		var_dump($this->options);
+		$this->wpm = $this->options['prtime_wpm'];
+		$this->position = $this->options['prtime_position'];
+		$this->page = implode(" || ", $this->options['prtime_page']);
+		$this->display = $this->options['prtime_display'];
+
+		var_dump($this->page);
 
 	}
 
-	private static function display_time( $word_number ) {
+	public static function display_readingtime( $content ) {
 
 		$nb_words = str_word_count(strip_tags( $content ));
-		$reading_time = $nb_words / 200;
+		$wpm = $this->wpm;
 
-		return $display_time;
+		$minutes = floor( $nb_words / $wpm );
+		$seconds = floor( $nb_words % $wpm / ($wpm / 60) );
+
+		if( $this->display == 1 ){
+			if( $seconds > 30 ){
+				$minutes++;
+			}
+			$time = $minutes.' min';
+		} else {
+			if ( $seconds < 10){
+				$seconds = '0'.$seconds;
+			}
+			$time = $minutes.':'.$seconds.' sec';
+		}
+		return '<div class="reading_time">'.$time.'</div>';
 	}
 
-	private static function get_words_number( $content ) {
-		$nb_words = str_word_count(strip_tags( $content ));
-		$reading_time = $nb_words / 200;
+	public static function display( $content ){
+		//if( $this->page ){
 
-		return $reading_time;
+			if( $this->position == 1 ){
+
+				$display_content = self::display_readingtime($content);
+				$display_content .= $content;
+
+			} else {
+
+				$display_content = $content;
+				$display_content .= self::display_readingtime($content);
+
+			}
+			return $display_content;
+		//}
 	}
+}
 
-	// public static function before_the_content( $content ) {
-	// 	$before_content = $content;
-	// 	$before_content .= self::get_words_number( $content );
+
+	
+
+	// function before_the_content( $content ) {
+
+	// 	//$rtime = new Posts_Reading_Time_Calc();
+		
+	// 	$before_content = $rtime->display_time( $content );
+	// 	$before_content .= $content;
+
 	// 	return $before_content;
+
 	// }
-	//add_filter( 'the_content', 'before_the_content' );
+	// add_filter( 'the_content', 'before_the_content' );
 
 	/*function after_the_content( $content ) {
 			$after_content = $content;
@@ -128,5 +172,3 @@ class Posts_Reading_Time_Calc {
 		echo $estimated_time;
 
 	}*/
-
-}

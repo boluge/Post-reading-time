@@ -73,8 +73,7 @@ class prtime_Admin {
 	 * Admin page markup. Mostly handled by CMB2
 	 * @since  0.1.0
 	 */
-	public function admin_page_display() {
-		?>
+	public function admin_page_display() { ?>
 		<div class="wrap cmb2-options-page <?php echo $this->key; ?>">
 			<h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
 			<?php cmb2_metabox_form( $this->metabox_id, $this->key, array( 'cmb_styles' => false ) ); ?>
@@ -113,14 +112,14 @@ class prtime_Admin {
 			'desc' => __( 'Select the position where you want to display the reading time.' ),
 			'id'   => $this->prefix.'page',
 			'type'    => 'multicheck',
-			'default' => array('category', 'archive'),
+			'default' => array('is_category()', 'is_archive()'),
 			'options' => array(
-				'front_page' => __('Front page'),
-				'home' => __('Home page'),
-				'category' => __('Category page'),
-				'archive' => __('Archive page'),
-				'single' => __('Single page'),
-				
+				'is_front_page()' => __('Front page'),
+				'is_home()' => __('Home page'),
+				'is_category()' => __('Category page'),
+				'is_archive()' => __('Archive page'),
+				'is_single()' => __('Single page'),
+				'is_page()' => __('Page'),
 			)
 		) );
 
@@ -131,10 +130,9 @@ class prtime_Admin {
 			'type' => 'select',
 			'default' => '1',
 			'options' => array(
-				'1' => __( 'After Title' ),
-				'2' => __( 'After Content' ),
-				'3' => __( 'After Excerpt' ),
-			),
+				'1' => __( 'Before Content' ),
+				'2' => __( 'After Content' )
+			)
 		) );
 
 		$cmb->add_field( array(
