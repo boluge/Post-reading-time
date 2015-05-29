@@ -30,10 +30,10 @@
 class Posts_Reading_Time_Calc {
 
 	private $options;
-	private $wpm;
-	private $position;
-	private $page;
-	private $display;
+	private static $wpm;
+	private static $position;
+	private static $page;
+	private static $display;
 
 	/**
 	 * Define the core functionality of the plugin.
@@ -58,56 +58,78 @@ class Posts_Reading_Time_Calc {
 
 		$this->options = get_option('prtime_options', $default);
 
-		$this->wpm = $this->options['prtime_wpm'];
-		$this->position = $this->options['prtime_position'];
-		$this->page = implode(" || ", $this->options['prtime_page']);
-		$this->display = $this->options['prtime_display'];
-
-		var_dump($this->page);
+		self::$wpm = $this->options['prtime_wpm'];
+		self::$position = $this->options['prtime_position'];
+		self::$page = $this->options['prtime_page'];
+		self::$display = $this->options['prtime_display'];
 
 	}
 
-	public static function display_readingtime( $content ) {
+	public static function display_content( $content, $postid ) {
+		
+		$content_post = get_post($postid);
+		$post_content = $content_post->post_content;
 
-		$nb_words = str_word_count(strip_tags( $content ));
-		$wpm = $this->wpm;
+		// var_dump($content);
+		// var_dump($postid);
+		// var_dump($post_content);
+
+		//die();
+
+		$nb_words = str_word_count( strip_tags( $post_content ) );
+		$wpm = self::$wpm;
 
 		$minutes = floor( $nb_words / $wpm );
 		$seconds = floor( $nb_words % $wpm / ($wpm / 60) );
 
-		if( $this->display == 1 ){
+		if( self::$display == 1 ){
 			if( $seconds > 30 ){
 				$minutes++;
 			}
-			$time = $minutes.' min';
+			if($minutes < 1) {
+				$time = __('Less than a minute');
+			} else {
+				$time = $minutes.' min';
+			}
+			
 		} else {
 			if ( $seconds < 10){
 				$seconds = '0'.$seconds;
 			}
 			$time = $minutes.':'.$seconds.' sec';
 		}
-		return '<div class="reading_time">'.$time.'</div>';
+
+		$time = '<div class="reading_time">'.$time.'</div>';
+		
+		if( self::$position == 1 ){
+
+			$display_content = $time;
+			$display_content .= $content;
+
+		} else {
+
+			$display_content = $content;
+			$display_content .= $time;
+
+		}
+
+		
+		return $display_content;
+		
+		
 	}
 
-	public static function display( $content ){
-		//if( $this->page ){
+	
 
-			if( $this->position == 1 ){
-
-				$display_content = self::display_readingtime($content);
-				$display_content .= $content;
-
-			} else {
-
-				$display_content = $content;
-				$display_content .= self::display_readingtime($content);
-
-			}
-			return $display_content;
-		//}
-	}
 }
 
+
+function for_the_content( $content ) {
+	$postid = get_the_ID();
+	return Posts_Reading_Time_Calc::display_content( $content, $postid );
+}
+add_filter( 'the_content', 'for_the_content' );
+add_filter( 'the_excerpt', 'for_the_content' );
 
 	
 
