@@ -63,18 +63,19 @@ class Posts_Reading_Time_Calc {
 		self::$page = $this->options['prtime_page'];
 		self::$display = $this->options['prtime_display'];
 
+		//var_dump(self::$page);
+
+	}
+
+	public function get_pages_display() {
+		$pages = self::$page;
+		return $pages;
 	}
 
 	public static function display_content( $content, $postid ) {
 		
 		$content_post = get_post($postid);
 		$post_content = $content_post->post_content;
-
-		// var_dump($content);
-		// var_dump($postid);
-		// var_dump($post_content);
-
-		//die();
 
 		$nb_words = str_word_count( strip_tags( $post_content ) );
 		$wpm = self::$wpm;
@@ -100,7 +101,7 @@ class Posts_Reading_Time_Calc {
 		}
 
 		$time = '<div class="reading_time">'.$time.'</div>';
-		
+
 		if( self::$position == 1 ){
 
 			$display_content = $time;
@@ -112,17 +113,23 @@ class Posts_Reading_Time_Calc {
 			$display_content .= $time;
 
 		}
-
 		
 		return $display_content;
-		
-		
 	}
-
-	
-
 }
 
+
+// is_front_page()
+// is_home()
+// is_category()
+// is_archive()
+// is_single()
+// is_page()
+
+// https://wordpress.org/support/topic/getting-is_single-to-work-in-functionsphp
+
+$reading_time = new Posts_Reading_Time_Calc();
+$pages = $reading_time->get_pages_display();
 
 function for_the_content( $content ) {
 	$postid = get_the_ID();
@@ -131,66 +138,3 @@ function for_the_content( $content ) {
 add_filter( 'the_content', 'for_the_content' );
 add_filter( 'the_excerpt', 'for_the_content' );
 
-	
-
-	// function before_the_content( $content ) {
-
-	// 	//$rtime = new Posts_Reading_Time_Calc();
-		
-	// 	$before_content = $rtime->display_time( $content );
-	// 	$before_content .= $content;
-
-	// 	return $before_content;
-
-	// }
-	// add_filter( 'the_content', 'before_the_content' );
-
-	/*function after_the_content( $content ) {
-			$after_content = $content;
-			$after_content .= '<div class="read">YOUR CONTENT GOES HERE</div>';
-			return $after_content;
-		}
-		add_filter( 'the_content', 'after_the_content' );
-
-		function before_the_excerpt( $excerpt ) {
-			$before_excerpt = '<p class="read">YOUR CONTENT GOES HERE</p>';
-			$before_excerpt .= $excerpt;
-			return $before_excerpt;
-		}
-		add_filter( 'the_excerpt', 'before_the_excerpt' );
-
-		function after_the_excerpt( $excerpt ) {
-			$after_excerpt = $excerpt;
-			$after_excerpt .= '<p class="read">YOUR CONTENT GOES HERE</p>';
-			return $after_excerpt;
-		}
-		add_filter( 'the_excerpt', 'after_the_excerpt' );*/
-	/*public function post_read_time() {
-	
-		$post_id = get_the_ID();
-
-		var_dump($post_id);
-		
-		$content = apply_filters('the_content', get_post_field('post_content', $post_id));
-		$num_words = str_word_count(strip_tags($content));
-		$minutes = floor($num_words / $words_per_second_option);
-		$seconds = floor($num_words % $words_per_second_option / ($words_per_second_option / 60));
-		$estimated_time = $prefix;
-		if($time == "1") {
-			if($seconds >= 30) {
-				$minutes = $minutes + 1;
-			}
-			$estimated_time = $estimated_time.' '.$minutes . ' minute'. ($minutes == 1 ? '' : 's');
-		}
-		else {
-			$estimated_time = $estimated_time.' '.$minutes . ' minute'. ($minutes == 1 ? '' : 's') . ', ' . $seconds . ' second' . ($seconds == 1 ? '' : 's');		
-		}
-		if($minutes < 1) {
-			$estimated_time = $estimated_time." Less than a minute";
-		}
-
-		$estimated_time = $estimated_time.$suffix;
-		
-		echo $estimated_time;
-
-	}*/
