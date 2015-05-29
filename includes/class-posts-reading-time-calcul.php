@@ -30,8 +30,6 @@
 class Posts_Reading_Time_Calc {
 
 	private $options;
-	private $article;
-	private $secondes;
 
 	/**
 	 * Define the core functionality of the plugin.
@@ -55,14 +53,33 @@ class Posts_Reading_Time_Calc {
 		);
 		$this->options = get_option('prtime_options', $default);
 
-		/*function before_the_content( $content ) {
-			$before_content = '<p class="read">YOUR CONTENT GOES HERE</p>';
-			$before_content .= $content;
-			return $before_content;
-		}
-		add_filter( 'the_content', 'before_the_content' );
+		var_dump($this->options);
 
-		function after_the_content( $content ) {
+	}
+
+	private static function display_time( $word_number ) {
+
+		$nb_words = str_word_count(strip_tags( $content ));
+		$reading_time = $nb_words / 200;
+
+		return $display_time;
+	}
+
+	private static function get_words_number( $content ) {
+		$nb_words = str_word_count(strip_tags( $content ));
+		$reading_time = $nb_words / 200;
+
+		return $reading_time;
+	}
+
+	// public static function before_the_content( $content ) {
+	// 	$before_content = $content;
+	// 	$before_content .= self::get_words_number( $content );
+	// 	return $before_content;
+	// }
+	//add_filter( 'the_content', 'before_the_content' );
+
+	/*function after_the_content( $content ) {
 			$after_content = $content;
 			$after_content .= '<div class="read">YOUR CONTENT GOES HERE</div>';
 			return $after_content;
@@ -82,9 +99,7 @@ class Posts_Reading_Time_Calc {
 			return $after_excerpt;
 		}
 		add_filter( 'the_excerpt', 'after_the_excerpt' );*/
-	}
-
-	public function post_read_time() {
+	/*public function post_read_time() {
 	
 		$post_id = get_the_ID();
 
@@ -112,6 +127,6 @@ class Posts_Reading_Time_Calc {
 		
 		echo $estimated_time;
 
-	}
+	}*/
 
 }
