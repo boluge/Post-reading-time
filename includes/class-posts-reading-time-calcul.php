@@ -50,8 +50,8 @@ class Posts_Reading_Time_Calc {
 			'prtime_wpm' => '200',
 			'prtime_position' => '1',
 			'prtime_page' => array(
-				'is_category()',
-				'is_archive()'
+				'category',
+				'archive'
 			),
 			'prtime_display' => '1'
 		);
@@ -88,16 +88,16 @@ class Posts_Reading_Time_Calc {
 				$minutes++;
 			}
 			if($minutes < 1) {
-				$time = __('Less than a minute');
+				$time = __('Less than a minute', 'posts-reading-time' );
 			} else {
-				$time = $minutes.' min';
+				$time = $minutes.__(' min', 'posts-reading-time' );
 			}
 			
 		} else {
 			if ( $seconds < 10){
 				$seconds = '0'.$seconds;
 			}
-			$time = $minutes.':'.$seconds.' sec';
+			$time = $minutes.__(':', 'posts-reading-time' ).$seconds.__(' sec', 'posts-reading-time' );
 		}
 
 		$time = '<div class="reading_time">'.$time.'</div>';
@@ -119,22 +119,22 @@ class Posts_Reading_Time_Calc {
 }
 
 
-// is_front_page()
-// is_home()
-// is_category()
-// is_archive()
-// is_single()
-// is_page()
+function readingtime_function(){
 
-// https://wordpress.org/support/topic/getting-is_single-to-work-in-functionsphp
+	$reading_time = new Posts_Reading_Time_Calc();
+	$pages = $reading_time->get_pages_display();
 
-$reading_time = new Posts_Reading_Time_Calc();
-$pages = $reading_time->get_pages_display();
+	if( is_front_page() && in_array("front_page", $pages) || is_home() && in_array("home", $pages) || is_category() && in_array("category", $pages) || is_archive() && in_array('archive', $pages) || is_single() && in_array('single', $pages) || is_page() && in_array('page', $pages) ){
+		
+		function for_the_content( $content ) {
+			$postid = get_the_ID();
+			return Posts_Reading_Time_Calc::display_content( $content, $postid );
+		}
 
-function for_the_content( $content ) {
-	$postid = get_the_ID();
-	return Posts_Reading_Time_Calc::display_content( $content, $postid );
+		add_filter( 'the_content', 'for_the_content' );
+		add_filter( 'the_excerpt', 'for_the_content' );
+	}
+
 }
-add_filter( 'the_content', 'for_the_content' );
-add_filter( 'the_excerpt', 'for_the_content' );
 
+add_action('template_redirect', 'readingtime_function');

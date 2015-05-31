@@ -1,9 +1,8 @@
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Posts Reading Time\n"
 "POT-Creation-Date: 2015-05-31 17:27+0100\n"
-"PO-Revision-Date: 2015-05-31 16:11+0100\n"
+"PO-Revision-Date: 2015-05-31 17:30+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -13,104 +12,110 @@ msgstr ""
 "X-Poedit-Basepath: ../\n"
 "X-Poedit-WPHeader: posts-reading-time.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
-"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;"
+"esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;"
+"esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fr\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "X-Poedit-SearchPathExcluded-1: vendor\n"
 
 #: includes/class-posts-reading-time-calcul.php:91
 msgid "Less than a minute"
-msgstr ""
+msgstr "Moins d'une minute"
 
 #: includes/class-posts-reading-time-calcul.php:93
 msgid " min"
-msgstr ""
+msgstr "min"
 
 #: includes/class-posts-reading-time-calcul.php:100
 msgid ":"
-msgstr ""
+msgstr ":"
 
 #: includes/class-posts-reading-time-calcul.php:100
 msgid " sec"
-msgstr ""
+msgstr "sec"
 
 #: includes/class-posts-reading-time-options.php:39
 msgid "Reading Time"
-msgstr ""
+msgstr "Temps de lecture"
 
 #: includes/class-posts-reading-time-options.php:103
 msgid "Words per minute"
-msgstr ""
+msgstr "Mots par minute"
 
 #: includes/class-posts-reading-time-options.php:104
 msgid ""
 "Here you set the reading speed in words per minute. In general rules, the "
 "average reading speed of 200 words per minute."
 msgstr ""
+"Ici, vous réglez la vitesse de lecture en mots par minute. En règles "
+"générales, la vitesse de lecture moyenne de 200 mots par minute."
 
 #: includes/class-posts-reading-time-options.php:111
 msgid "Pages"
-msgstr ""
+msgstr "Pages"
 
 #: includes/class-posts-reading-time-options.php:112
 msgid "Select the position where you want to display the reading time."
 msgstr ""
+"Sélectionnez l'endroit où vous souhaitez afficher le temps de lecture."
 
 #: includes/class-posts-reading-time-options.php:117
 msgid "Front page"
-msgstr ""
+msgstr "Première page"
 
 #: includes/class-posts-reading-time-options.php:118
 msgid "Home page"
-msgstr ""
+msgstr "Page d'accueil"
 
 #: includes/class-posts-reading-time-options.php:119
 msgid "Category page"
-msgstr ""
+msgstr "Page de catégorie"
 
 #: includes/class-posts-reading-time-options.php:120
 msgid "Archive page"
-msgstr ""
+msgstr "Page Archive"
 
 #: includes/class-posts-reading-time-options.php:121
 msgid "Single page"
-msgstr ""
+msgstr "Page unique"
 
 #: includes/class-posts-reading-time-options.php:122
 msgid "Page"
-msgstr ""
+msgstr "Page"
 
 #: includes/class-posts-reading-time-options.php:127
 #: includes/class-posts-reading-time-options.php:139
 msgid "Reading time Position"
-msgstr ""
+msgstr "Position du Temps de lecture"
 
 #: includes/class-posts-reading-time-options.php:128
 #: includes/class-posts-reading-time-options.php:140
 msgid "Define the pages where you want the reading time."
 msgstr ""
+"Sélectionnez l'endroit où vous souhaitez afficher le temps de lecture."
 
 #: includes/class-posts-reading-time-options.php:133
 msgid "Before Content"
-msgstr ""
+msgstr "Avant le contenu"
 
 #: includes/class-posts-reading-time-options.php:134
 msgid "After Content"
-msgstr ""
+msgstr "Après le contenu"
 
 #: includes/class-posts-reading-time-options.php:145
 msgid "Minutes"
-msgstr ""
+msgstr "Minutes"
 
 #: includes/class-posts-reading-time-options.php:146
 msgid "Minutes & seconds"
-msgstr ""
+msgstr "Minutes & secondes"
 
 #. Plugin Name of the plugin/theme
 msgid "Posts Reading Time"
-msgstr ""
+msgstr "Temps de lecture"
 
 #. Description of the plugin/theme
 msgid "Add Reading time for all post in category page"
@@ -118,4 +123,4 @@ msgstr ""
 
 #. Author of the plugin/theme
 msgid "Stephane Deluce"
-msgstr ""
+msgstr "Stephane Deluce"

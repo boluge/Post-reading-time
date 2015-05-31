@@ -36,7 +36,7 @@ class prtime_Admin {
 	 */
 	public function __construct() {
 		// Set our title
-		$this->title = __( 'Reading Time', 'prtime' );
+		$this->title = __( 'Reading Time', 'posts-reading-time' );
 	}
 
 	/**
@@ -100,8 +100,8 @@ class prtime_Admin {
 		// Set our CMB2 fields
 
 		$cmb->add_field( array(
-			'name' => __( 'Words per minute' ),
-			'desc' => __( 'Here you set the reading speed in words per minute. In general rules, the average reading speed of 200 words per minute.' ),
+			'name' => __( 'Words per minute', 'posts-reading-time' ),
+			'desc' => __( 'Here you set the reading speed in words per minute. In general rules, the average reading speed of 200 words per minute.', 'posts-reading-time' ),
 			'id'   => $this->prefix.'wpm',
 			'type' => 'text_small',
 			'default' => '200',
@@ -109,41 +109,41 @@ class prtime_Admin {
 
 		$cmb->add_field( array(
 			'name' => __( 'Pages' ),
-			'desc' => __( 'Select the position where you want to display the reading time.' ),
+			'desc' => __( 'Select the position where you want to display the reading time.', 'posts-reading-time' ),
 			'id'   => $this->prefix.'page',
 			'type'    => 'multicheck',
 			'default' => array('is_category()', 'is_archive()'),
 			'options' => array(
-				'is_front_page()' => __('Front page'),
-				'is_home()' => __('Home page'),
-				'is_category()' => __('Category page'),
-				'is_archive()' => __('Archive page'),
-				'is_single()' => __('Single page'),
-				'is_page()' => __('Page'),
+				'front_page' => __('Front page', 'posts-reading-time' ),
+				'home' => __('Home page', 'posts-reading-time' ),
+				'category' => __('Category page', 'posts-reading-time' ),
+				'archive' => __('Archive page', 'posts-reading-time' ),
+				'single' => __('Single page', 'posts-reading-time' ),
+				'page' => __('Page', 'posts-reading-time' ),
 			)
 		) );
 
 		$cmb->add_field( array(
-			'name' => __( 'Reading time Position' ),
-			'desc' => __( 'Define the pages where you want the reading time.' ),
+			'name' => __( 'Reading time Position', 'posts-reading-time' ),
+			'desc' => __( 'Define the pages where you want the reading time.', 'posts-reading-time' ),
 			'id'   => $this->prefix.'position',
 			'type' => 'select',
 			'default' => '1',
 			'options' => array(
-				'1' => __( 'Before Content' ),
-				'2' => __( 'After Content' )
+				'1' => __( 'Before Content', 'posts-reading-time' ),
+				'2' => __( 'After Content', 'posts-reading-time' )
 			)
 		) );
 
 		$cmb->add_field( array(
-			'name' => __( 'Reading time Position' ),
-			'desc' => __( 'Define the pages where you want the reading time.' ),
+			'name' => __( 'Reading time Position', 'posts-reading-time' ),
+			'desc' => __( 'Define the pages where you want the reading time.', 'posts-reading-time' ),
 			'id'   => $this->prefix.'display',
 			'type' => 'select',
 			'default' => '1',
 			'options' => array(
-				'1' => __( 'Minutes' ),
-				'2' => __( 'Minutes & seconds' )
+				'1' => __( 'Minutes', 'posts-reading-time' ),
+				'2' => __( 'Minutes & seconds', 'posts-reading-time' )
 			),
 		) );
 
@@ -167,7 +167,7 @@ class prtime_Admin {
 }
 
 /**
- * Helper function to get/return the prtime_Admin object
+ * Helper function to get/return the posts-reading-time_Admin object
  * @since  0.1.0
  * @return prtime_Admin object
  */

@@ -2,3 +2,8 @@
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
+.reading_time {
+  font-weight: bold;
+  margin: 10px 0; }
+  .reading_time:before {
+    margin-right: 5px; }
